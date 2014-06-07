@@ -16,8 +16,13 @@ public class Boston {
     public static boolean makePlane(double difficulty, Airport airport, File perfect){
         
     }
-    
+    // Creates a perfect airplane from a perfect airplane examples file
     private Airplane loadPerfect(File f){
+        
+    }
+    
+    //Uses the preferred routes file to generate a perfect aircraft
+    private Airplane makePerfect(File f){
         
     }
 }
