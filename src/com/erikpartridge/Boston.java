@@ -5,6 +5,7 @@
 **/
 package com.erikpartridge;
 
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
@@ -42,6 +43,13 @@ public class Boston {
         } else if(score < chance * 4){
             acf.setType(acf.getType().substring(0,4));
         }
+        acf.setRemarks("/V/");
+        acf.setsMode('S');
+        String park = acf.getParking();
+        
+        Point2D.Double parking = airport.getParkingPlace(park);
+        acf.setLat(parking.x);
+        acf.setLon(parking.y);
         
     }
     // Creates a perfect airplane from a perfect airplane examples file
@@ -83,6 +91,7 @@ public class Boston {
     private Aircraft makePerfect(){
         return null;
     }
+    
     private static char changeRules(char init){
         if(init == 'I'){
             return 'V';
