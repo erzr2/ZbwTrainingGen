@@ -18,17 +18,30 @@ import java.util.logging.Logger;
 
 public class Boston {
 
-    private final Random rand = new Random();
+    private final static Random rand = new Random();
     
     private static ArrayList<Aircraft> perfect;
     
     //Makes an aircraft
     //Difficulty between 0-10, 5 = average 1 error per flight plan, 10 = 2, etc.
-    public static void makePlane(double difficulty, Airport airport, File perfect){
+    public static void makePlane(double difficulty, Airport airport, File pft){
         if(perfect == null){
             loadPerfect(airport);
         }
+        Aircraft acf = perfect.get(rand.nextInt(perfect.size()));
         double chance = difficulty / 20;
+        double score = rand.nextDouble();
+        if(score < chance * 1.5){
+            acf.setRoute(changeRoute(acf.getRoute()));
+        } else if(score < chance * 2){
+            acf.setRules(changeRules(acf.getRules()));
+        } else if(score < chance * 2.5){
+            acf.setCruise(acf.getCruise() + 500);
+        } else if(score < chance * 3){
+            acf.setCruise(acf.getCruise() + 1000);
+        } else if(score < chance * 4){
+            acf.setType(acf.getType().substring(0,4));
+        }
         
     }
     // Creates a perfect airplane from a perfect airplane examples file
@@ -70,8 +83,14 @@ public class Boston {
     private Aircraft makePerfect(){
         return null;
     }
-    
-    private String changeRoute(String init){
+    private static char changeRules(char init){
+        if(init == 'I'){
+            return 'V';
+        } else{
+            return 'I';
+        }
+    }
+    private static String changeRoute(String init){
         double type = rand.nextDouble();
         if(init.trim().charAt(6) == ' '){
             if(type < .5){
