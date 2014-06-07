@@ -26,12 +26,12 @@ public class Airport {
     */
     private HashMap<String, ArrayList<Point2D.Double>> parking;
     //Name of the airport
-    private final String name;
+    private final String icao;
     
     private final Random rand = new Random();
     
     public Airport(File f){
-        this.name = "";
+        this.icao = "";
         try {
             loadParking(f);
         } catch (FileNotFoundException ex) {
@@ -53,6 +53,7 @@ public class Airport {
         //Going through parking place file
         while(in.hasNextLine()){
             String line = in.nextLine();
+            
             if(!line.substring(0,2).equals("//")){          
                 String[] split = line.split(":");
                 Point2D.Double pt = new Point2D.Double(Double.parseDouble(split[1]), Double.parseDouble(split[2]));
@@ -75,6 +76,13 @@ public class Airport {
             return null;
         }
         return opt.remove(rand.nextInt(opt.size()));
+    }
+
+    /**
+     * @return the icao
+     */
+    public String getIcao() {
+        return icao;
     }
     
     

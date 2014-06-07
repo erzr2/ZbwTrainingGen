@@ -5,9 +5,15 @@
 **/
 package com.erikpartridge;
 
-import java.util.ArrayList;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Boston {
@@ -23,13 +29,38 @@ public class Boston {
         
     }
     // Creates a perfect airplane from a perfect airplane examples file
-    public Aircraft loadPerfect(File f){
+    private Aircraft loadPerfect(Airport airport){
+        URL url = Loader.resources.get(airport.getIcao());
+        File ex = null;
+        
+        try {
+            ex = new File(url.toURI());
+        } catch (URISyntaxException ex1) {
+            Logger.getLogger(Boston.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+        
+        Scanner in = null;
+        
+        try{
+            in = new Scanner(ex);
+        } catch (FileNotFoundException ex1) {
+            Logger.getLogger(Boston.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+        
+        while(in.hasNextLine()){
+            String line = in.nextLine();
+            if(!line.contains("\\")){
+                String[] data = line.split(":");
+                
+            }
+        }
+        
         
         return null;
     }
     
     //Uses the preferred routes file to generate a perfect aircraft
-    public Aircraft makePerfect(File f){
+    private Aircraft makePerfect(){
         return null;
     }
 }
