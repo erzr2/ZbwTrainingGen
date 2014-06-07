@@ -1,6 +1,6 @@
-/** (c) Erik Malmstrom-Partridge 2014
+/**
 This code is provided as-is without any warranty
-This source code or its compiled program may not be redistributed in any way
+This source code and its compiled program are released under the Apache 2.0 license.
 **/
 package com.erikpartridge;
 
@@ -17,8 +17,15 @@ import java.util.logging.Logger;
 
 public class Airport {
 
+    /* "A" is the key for airline parking spots
+     * "G" is the key for General aviation parking spots
+     * "C" is the key for cargo parking spots
+     * Stores all of those, and if parking is desired, accesses correct ArrayList and gets the coordinates
+    */
     private HashMap<String, ArrayList<Point2D.Double>> parking;
     
+    private final String name;
+    private final Random rand = new Random();
     
     public Airport(File f){
         try {
@@ -27,11 +34,19 @@ public class Airport {
             Logger.getLogger(Airport.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /* Should be called only in the constructor -- in a method for better error handling
+     * Creates the arraylists and puts them with their keys
+     * iterates through the parking place file and gets the coordinates
+     *
+    */
     private void loadParking(File f) throws FileNotFoundException{
         Scanner in = new Scanner(f);
+        //Initializing parking
         parking.put("A", new ArrayList<>());
         parking.put("G", new ArrayList<>());
+        parking.put("C", new ArrayList<>());
+        
+        //Going through parking place file
         while(in.hasNextLine()){
             String line = in.nextLine();
             String[] split = line.split(":");
@@ -39,6 +54,21 @@ public class Airport {
             parking.get(split[0]).add(pt);
         }
     }
+    
+    /* Gets a random parking place for an aircraft given its type */
+    public Point2D.Double getParkingPlace(String type){
+        ArrayList<Point2d.Double> opt = parking.get(type);
+        if(opt == null){
+            Logger.getLogger(Airport.class).log("Invalid type parameter at Airport.getParkingPlace:: passed::" + type);
+            return null;
+        }
+        else if(opt.size() < 1){
+            Logger.getLogger(Airport.class).log("No more parking places of this type available, type:: " + type);
+            return null;
+        }
+        return opt.remove(rand.nextInt(opt.size()));
+    }
+    
     
    
 }
