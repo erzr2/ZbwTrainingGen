@@ -5,11 +5,15 @@
 **/
 package com.erikpartridge;
 
+import java.util.ArrayList;
+import java.io.File;
 
 
 public class Boston {
 
     private final Random rand = new Random();
+    
+    private ArrayList<Airplane> perfect;
     
     //Makes an aircraft, false if failed (ie. no parking spaces)
     //Difficulty between 0-10, 5 = average 1 error per flight plan, 10 = 2, etc.
@@ -17,12 +21,12 @@ public class Boston {
         
     }
     // Creates a perfect airplane from a perfect airplane examples file
-    private Airplane loadPerfect(File f){
+    public Airplane loadPerfect(File f){
         
     }
     
     //Uses the preferred routes file to generate a perfect aircraft
-    private Airplane makePerfect(File f){
+    Airplane makePerfect(File f){
         
     }
 }
