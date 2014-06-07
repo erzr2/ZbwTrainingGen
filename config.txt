@@ -1,5 +1,5 @@
-kpwm.info.txt:http://
-kpwm_alternatives.txt:http://
-kpwm_parking.txt:http://
-kpwm_perfect_flights.txt:http://
-kpwm_preferred.txt:http://
+kpwm.info.txt;http://
+kpwm_alternatives.txt;http://
+kpwm_parking.txt;http://
+kpwm_perfect_flights.txt;http://
+kpwm_preferred.txt;http://
