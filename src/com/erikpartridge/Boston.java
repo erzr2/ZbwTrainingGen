@@ -29,7 +29,7 @@ public class Boston {
         
     }
     // Creates a perfect airplane from a perfect airplane examples file
-    private Aircraft loadPerfect(Airport airport){
+    private void loadPerfect(Airport airport){
         URL url = Loader.resources.get(airport.getIcao());
         File ex = null;
         
@@ -51,12 +51,14 @@ public class Boston {
             String line = in.nextLine();
             if(!line.contains("\\")){
                 String[] data = line.split(":");
-                
+                //Make a new plane from each line
+                Aircraft a;
+                a = new Aircraft(data[0],data[1],data[2],data[3].charAt(0),
+                        data[4].toCharArray(), data[5].toCharArray(),Integer.parseInt(data[6]),
+                        data[7],"/v/", new Byte[4], 'S',0.0,0.0,0,0,360, data[8].trim());
+                perfect.add(a);
             }
         }
-        
-        
-        return null;
     }
     
     //Uses the preferred routes file to generate a perfect aircraft

@@ -27,7 +27,7 @@ public class Aircraft {
     
     private String remarks;
     
-    private byte[] squawk;
+    private Byte[] squawk;
     
     private char sMode;
     
@@ -41,12 +41,13 @@ public class Aircraft {
     
     private int heading;
 
+    private String parking;
     
     public Aircraft(){
         
     }
 
-    public Aircraft(String callsign, String type, String engine, char rules, char[] dep, char[] arr, int cruise, String route, String remarks, byte[] squawk, char sMode, double lat, double lon, int altitude, int speed, int heading) {
+    public Aircraft(String callsign, String type, String engine, char rules, char[] dep, char[] arr, int cruise, String route, String remarks,Byte[] squawk, char sMode, double lat, double lon, int altitude, int speed, int heading, String park) {
         this.callsign = callsign;
         this.type = type;
         this.engine = engine;
@@ -63,6 +64,7 @@ public class Aircraft {
         this.altitude = altitude;
         this.speed = speed;
         this.heading = heading;
+        this.parking = park;
     }
     
     /**
@@ -194,14 +196,14 @@ public class Aircraft {
     /**
      * @return the squawk code
      */
-    public byte[] getSquawk() {
+    public Byte[] getSquawk() {
         return squawk;
     }
 
     /**
      * @param squawk the squawk code
      */
-    public void setSquawk(byte[] squawk) {
+    public void setSquawk(Byte[] squawk) {
         this.squawk = squawk;
     }
 
@@ -288,5 +290,10 @@ public class Aircraft {
     public void setHeading(int heading) {
         this.heading = heading;
     }
+    
+    public String getParking(){
+        return parking;
+    }
+            
     
 }
