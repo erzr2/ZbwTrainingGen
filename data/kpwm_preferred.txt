@@ -1,3 +1,6 @@
+//US ROUTES ONLY
+//Departs:Route:Arrives
+//Can generate extras using this and making them bad
 PWM:ENE V139 TONNI ACK:ACK
 PWM:CON CAM ALB:ALB
 PWM:ENE V106 GDM V229 WITNY BDL:BDL
