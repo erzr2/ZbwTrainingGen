@@ -14,7 +14,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import javax.vecmath.Point2d;
 
 
 
