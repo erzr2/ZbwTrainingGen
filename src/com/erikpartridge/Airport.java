@@ -59,11 +59,11 @@ public class Airport {
     public Point2D.Double getParkingPlace(String type){
         ArrayList<Point2d.Double> opt = parking.get(type);
         if(opt == null){
-            Logger.getLogger(Airport.class).log("Invalid type parameter at Airport.getParkingPlace:: passed::" + type);
+            Logger.getLogger(Airport.class.getName()).log("Invalid type parameter at Airport.getParkingPlace:: passed::" + type);
             return null;
         }
         else if(opt.size() < 1){
-            Logger.getLogger(Airport.class).log("No more parking places of this type available, type:: " + type);
+            Logger.getLogger(Airport.class.getName()).log("No more parking places of this type available, type:: " + type);
             return null;
         }
         return opt.remove(rand.nextInt(opt.size()));
