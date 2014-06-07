@@ -1,3 +1,7 @@
+//Any of these can be randomly translated into any other in the same line
+//To make a flight plan different/harder
+//Perfect should be far left.
+//Each line must end with ":"
 NUBLE1 CCC:NUBLE RBELA JJIMY ORW CCC:NUBLE:CCC: NUBLE CCC:NUBLE1 RBELA JJIMY:
 NUBLE1 BAF:GHORM NUBLE RBELA JJIMY COTEE BAF:NUBLE RBELA JJIMY COTEE BAF:BAF:NUBLE BAF:
 NUBLE1 NELIE:NUBLE JJIMY NELIE:NUBLE RBELA JJIMY NELIE:NUBLE1 RBELA JJIMY NELIE:NELIE:NUBLE NELIE:
