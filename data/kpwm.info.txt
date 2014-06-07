@@ -1,0 +1,2 @@
+Information file
+This will not be accessed by the parser.
