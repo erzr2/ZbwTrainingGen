@@ -7,7 +7,10 @@ package com.erikpartridge;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -21,8 +24,15 @@ public class Loader {
     
     public static HashMap<String, URL> resources = new HashMap<>();
     
+    public static HashMap<String, ArrayList<String>> alts = new HashMap<>();
+            
     public static void load(){
         configure();
+        try {
+            loadAlternatives();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static void configure(){
@@ -46,5 +56,26 @@ public class Loader {
             }
             resources.put(dat[0], url);
         }
+        in.close();
+    }
+    
+    public static void loadAlternatives() throws URISyntaxException{
+        URL url = resources.get("kpwm_alternatives.txt");
+        File f = new File(url.toURI());
+        Scanner s = null;
+        try {
+            s = new Scanner(f);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        while(s.hasNextLine()){
+            String line = s.nextLine();
+            if(!line.substring(0, 2).equals("//")){
+                String[] data = line.split(":");
+                alts.put(data[0], (ArrayList<String>) Arrays.asList(data));
+            }
+        }
+        s.close();
     }
 }

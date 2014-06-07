@@ -20,16 +20,19 @@ public class Boston {
 
     private final Random rand = new Random();
     
-    private ArrayList<Aircraft> perfect;
+    private static ArrayList<Aircraft> perfect;
     
     //Makes an aircraft
     //Difficulty between 0-10, 5 = average 1 error per flight plan, 10 = 2, etc.
     public static void makePlane(double difficulty, Airport airport, File perfect){
-        
+        if(perfect == null){
+            loadPerfect(airport);
+        }
+        double chance = difficulty / 20;
         
     }
     // Creates a perfect airplane from a perfect airplane examples file
-    private void loadPerfect(Airport airport){
+    private static void loadPerfect(Airport airport){
         URL url = Loader.resources.get(airport.getIcao());
         File ex = null;
         
@@ -59,10 +62,55 @@ public class Boston {
                 perfect.add(a);
             }
         }
+        in.close();
     }
     
     //Uses the preferred routes file to generate a perfect aircraft
+    //TODO
     private Aircraft makePerfect(){
         return null;
+    }
+    
+    private String changeRoute(String init){
+        double type = rand.nextDouble();
+        if(init.trim().charAt(6) == ' '){
+            if(type < .5){
+                String temp = init.substring(6);
+                ArrayList<String> opts = Loader.alts.get(init.substring(0,6));
+                String chosen = opts.get(rand.nextInt(opts.size()));
+                return chosen + temp;
+            }
+            else if(type < .65 && init.length() > 6){
+                return init.substring(6);
+            }
+            else if(type < .7){
+                return "DIRECT";
+            }
+            else if(type < .8){
+                if(init.charAt(init.length() - 1) > 47 && init.charAt(init.length() - 1) < 58){
+                    return init.substring(0, init.length() - 7);
+                }
+            } else{
+                return init.replaceAll(" ", " DCT ");
+            }
+        } else{
+            if(type < .5){
+                return "PWM4 DIRECT" + init;
+            }
+            else if(type < .65 && init.length() > 6){
+                return init.substring(6);
+            }
+            else if(type < .7){
+                return "DIRECT";
+            }
+            else if(type < .8){
+                if(init.charAt(init.length() - 1) > 47 && init.charAt(init.length() - 1) < 58){
+                    return init.substring(0, init.length() - 7);
+                }
+            } else{
+                return init.replaceAll(" ", " DCT ");
+            }
+        }
+        return init;
     }
 }
