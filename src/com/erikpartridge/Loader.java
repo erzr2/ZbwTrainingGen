@@ -84,6 +84,7 @@ public class Loader {
                 String[] data = line.split(":");
                 alts.put(data[0], new ArrayList<>(Arrays.asList(data)));
             }
+            count++;
         }
         s.close();
     }

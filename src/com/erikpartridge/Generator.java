@@ -24,24 +24,17 @@ public class Generator {
             Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
         }
         int count = 0;
-        while(a.hasParking() && count < 45){
+        while(a.hasParking() && count < 100){
             Aircraft acf = Boston.makePlane(difficulty, a);
             if(acf != null){
                 out.write(acf.getCallsign() + ":" + acf.getType() + ":" + acf.getEngine() + ":" + 
                         acf.getRules() + ":" + acf.getDep() + ":" + acf.getArr() + ":" + acf.getCruise() + ":"
-                        + acf.getRoute() + ":" + acf.getRemarks() + ":" + byteToString(acf.getSquawk()) + ":"
-                        + "S:" + acf.getAltitude() + ":"+ acf.getAltitude() + ":" + acf.getSpeed() + ":" +
+                        + acf.getRoute() + ":" + acf.getRemarks() + ":" + acf.getSquawk() + ":"
+                        + "S:" + acf.getLat() + ":" + acf.getLon() + ":"+ acf.getAltitude() + ":"+ acf.getAltitude() + ":" + acf.getSpeed() + ":" +
                         acf.getHeading() + "\n");
             }
         }
         out.close();
     }
     
-    public String byteToString(Byte[] in){
-        String res = "";
-        for(Byte b: in){
-            res += b.toString();
-        }
-        return res;
-    }
 }

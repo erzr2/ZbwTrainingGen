@@ -27,7 +27,7 @@ public class Aircraft {
     
     private String remarks;
     
-    private Byte[] squawk;
+    private String squawk;
     
     private char sMode;
     
@@ -48,7 +48,7 @@ public class Aircraft {
     }
 
     public Aircraft(String callsign, String type, String engine, char rules, String dep,
-            String arr, int cruise, String route, String remarks,Byte[] squawk, char sMode,
+            String arr, int cruise, String route, String remarks,String squawk, char sMode,
             double lat, double lon, int altitude, int speed, int heading, String park) {
         this.callsign = callsign;
         this.type = type;
@@ -198,14 +198,14 @@ public class Aircraft {
     /**
      * @return the squawk code
      */
-    public Byte[] getSquawk() {
+    public String getSquawk() {
         return squawk;
     }
 
     /**
      * @param squawk the squawk code
      */
-    public void setSquawk(Byte[] squawk) {
+    public void setSquawk(String squawk) {
         this.squawk = squawk;
     }
 

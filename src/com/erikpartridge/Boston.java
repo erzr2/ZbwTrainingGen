@@ -28,7 +28,7 @@ public class Boston {
     public static Aircraft makePlane(double difficulty, Airport airport){
         loadPerfect(airport);
         Aircraft acf = perfect.get(rand.nextInt(perfect.size()));
-        double chance = difficulty / 20;
+        double chance = difficulty / 16;
         double score = rand.nextDouble();
         if(score < chance * 1.5){
             acf.setRoute(changeRoute(acf.getRoute()));
@@ -50,7 +50,14 @@ public class Boston {
             acf.setLat(parking.x);
             acf.setLon(parking.y);
             int num = rand.nextInt(10000);
-            acf.setCallsign(acf.getCallsign().substring(0,3) + num);
+            if(!(acf.getCallsign().charAt(0) == 'N')){
+               acf.setCallsign(acf.getCallsign().substring(0,3) + num);
+            }
+            else{
+                char first = (char)(rand.nextInt(26) + 'A');
+                char sec = (char)(rand.nextInt(26) + 'A');
+                acf.setCallsign("N" + rand.nextInt(999) + first + sec);
+            }
         return acf;
         } else{
             return null;
@@ -68,18 +75,22 @@ public class Boston {
         
         Scanner in = null;
         in = new Scanner(ex);
+        int count = 0;
         while(in.hasNextLine()){
             String line = in.nextLine();
-            if(!line.contains("\\")){
+            if(!line.contains("\\") && count > 0){
                 String[] data = line.split(":");
-                System.out.println(data);
                 //Make a new plane from each line
-                Aircraft a;
-                a = new Aircraft(data[0],data[1],data[2],data[3].charAt(0),
+                if(data.length > 8){
+                    Aircraft a;
+                
+                    a = new Aircraft(data[0],data[1],data[2],data[3].charAt(0),
                         data[4], data[5],Integer.parseInt(data[6]),
-                        data[7],"/v/", new Byte[4], 'S',0.0,0.0,74,0,360, data[8].trim());
-                perfect.add(a);
+                        data[7],"/v/", "0000", 'S',0.0,0.0,74,0,360, data[8].trim());
+                    perfect.add(a);
+                }
             }
+            count++;
         }
         in.close();
             Logger.getLogger(Boston.class.getName()).log(Level.SEVERE, null, "");
@@ -100,10 +111,13 @@ public class Boston {
     
     private static String changeRoute(String init){
         double type = rand.nextDouble();
-        if(init.trim().charAt(6) == ' '){
+        if(init.length() > 6 && init.trim().charAt(6) == ' '){
             if(type < .5){
                 String temp = init.substring(6);
                 List<String> opts = Loader.alts.get(init.substring(0,6));
+                if(opts == null){
+                    return "DIRECt";
+                }
                 String chosen = opts.get(rand.nextInt(opts.size()));
                 return chosen + temp;
             }
