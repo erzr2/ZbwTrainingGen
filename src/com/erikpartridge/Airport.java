@@ -5,8 +5,6 @@ This source code and its compiled program are released under the Apache 2.0 lice
 package com.erikpartridge;
 
 import java.awt.geom.Point2D;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -28,18 +28,31 @@ public class Boston {
     public static Aircraft makePlane(double difficulty, Airport airport){
         loadPerfect(airport);
         Aircraft acf = perfect.get(rand.nextInt(perfect.size()));
-        double chance = difficulty / 16;
-        double score = rand.nextDouble();
-        if(score < chance * 1.5){
-            acf.setRoute(changeRoute(acf.getRoute()));
-        } else if(score < chance * 2){
-            acf.setRules(changeRules(acf.getRules()));
-        } else if(score < chance * 2.5){
-            acf.setCruise(acf.getCruise() + 500);
-        } else if(score < chance * 3){
-            acf.setCruise(acf.getCruise() + 1000);
-        } else if(score < chance * 4){
-            acf.setType(acf.getType().substring(0,4));
+        if(difficulty > 7){
+            for(int i = 0; i < 2; i++){
+                
+            double chance = difficulty * 5;
+            if(rand.nextInt(250) < chance * 3){
+                acf.setRoute(changeRoute(acf.getRoute()));
+            } else if(rand.nextInt(250) < chance * 4.5){
+                acf.changeCruise();
+            } else if(rand.nextInt(250) < chance * 5){
+                acf.setRules(changeRules(acf.getRules()));
+            } else if(rand.nextInt(250) < chance * 5.25){
+                acf.setType(acf.getType().substring(0,4));
+            }
+         }
+        }else{
+            double chance = difficulty * 5;
+            if(rand.nextInt(100) < chance * 2.5){
+                acf.setRoute(changeRoute(acf.getRoute()));
+            } else if(rand.nextInt(100) < chance * 4.5){
+                acf.changeCruise();
+            } else if(rand.nextInt(100) < chance * 5){
+                acf.setRules(changeRules(acf.getRules()));
+            } else if(rand.nextInt(100) < chance * 5.25){
+                acf.setType(acf.getType().substring(0,4));
+            }
         }
         acf.setRemarks("/V/");
         acf.setsMode('S');
@@ -102,21 +115,17 @@ public class Boston {
     }
     
     private static char changeRules(char init){
-        if(init == 'I'){
-            return 'V';
-        } else{
-            return 'I';
-        }
+        return 'V';
     }
     
     private static String changeRoute(String init){
         double type = rand.nextDouble();
-        if(init.length() > 6 && init.trim().charAt(6) == ' '){
-            if(type < .5){
-                String temp = init.substring(6);
-                List<String> opts = Loader.alts.get(init.substring(0,6));
+        if(init.length() > 10 && init.trim().charAt(6) == ' '){
+            if(type < .6){
+                String temp = init.substring(10);
+                List<String> opts = Loader.alts.get(init.substring(0,10).trim());
                 if(opts == null){
-                    return "DIRECt";
+                    return init;
                 }
                 String chosen = opts.get(rand.nextInt(opts.size()));
                 return chosen + temp;
@@ -136,7 +145,7 @@ public class Boston {
             }
         } else{
             if(type < .5){
-                return "PWM4 DIRECT" + init;
+                return "PWM4" + init;
             }
             else if(type < .65 && init.length() > 6){
                 return init.substring(6);

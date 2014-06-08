@@ -159,6 +159,20 @@ public class Aircraft {
     public int getCruise() {
         return cruise;
     }
+    
+    public void changeCruise(){
+        double rand = Math.random();
+        if(rand < .15){
+            cruise -= 500;
+        }else if(rand < .3){
+            cruise += 500;
+        } else if( rand < .7){
+            cruise += 1000;
+        } else{
+            cruise -= 1000;
+        }
+        
+    }
 
     /**
      * @param cruise the cruise altitude
