@@ -17,9 +17,9 @@ public class Aircraft {
     
     private char rules;
     
-    private char[] dep;
+    private String dep;
     
-    private char[] arr;
+    private String arr;
     
     private int cruise;
     
@@ -47,7 +47,7 @@ public class Aircraft {
         
     }
 
-    public Aircraft(String callsign, String type, String engine, char rules, char[] dep, char[] arr, int cruise, String route, String remarks,Byte[] squawk, char sMode, double lat, double lon, int altitude, int speed, int heading, String park) {
+    public Aircraft(String callsign, String type, String engine, char rules, String dep, String arr, int cruise, String route, String remarks,Byte[] squawk, char sMode, double lat, double lon, int altitude, int speed, int heading, String park) {
         this.callsign = callsign;
         this.type = type;
         this.engine = engine;
@@ -126,28 +126,28 @@ public class Aircraft {
     /**
      * @return the departure field
      */
-    public char[] getDep() {
+    public String getDep() {
         return dep;
     }
 
     /**
      * @param dep the departure field
      */
-    public void setDep(char[] dep) {
+    public void setDep(String dep) {
         this.dep = dep;
     }
 
     /**
      * @return the arrival field
      */
-    public char[] getArr() {
+    public String getArr() {
         return arr;
     }
 
     /**
      * @param arr the arrival field
      */
-    public void setArr(char[] arr) {
+    public void setArr(String arr) {
         this.arr = arr;
     }
 

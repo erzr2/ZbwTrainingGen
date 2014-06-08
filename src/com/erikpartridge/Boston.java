@@ -25,7 +25,7 @@ public class Boston {
     
     //Makes an aircraft
     //Difficulty between 0-10, 5 = average 1 error per flight plan, 10 = 2, etc.
-    public static void makePlane(double difficulty, Airport airport, File pft){
+    public static Aircraft makePlane(double difficulty, Airport airport){
         if(perfect == null){
             loadPerfect(airport);
         }
@@ -48,9 +48,13 @@ public class Boston {
         String park = acf.getParking();
         
         Point2D.Double parking = airport.getParkingPlace(park);
-        acf.setLat(parking.x);
-        acf.setLon(parking.y);
-        
+        if(parking != null){
+            acf.setLat(parking.x);
+            acf.setLon(parking.y);
+        return acf;
+        } else{
+            return null;
+        }
     }
     // Creates a perfect airplane from a perfect airplane examples file
     private static void loadPerfect(Airport airport){
@@ -78,8 +82,8 @@ public class Boston {
                 //Make a new plane from each line
                 Aircraft a;
                 a = new Aircraft(data[0],data[1],data[2],data[3].charAt(0),
-                        data[4].toCharArray(), data[5].toCharArray(),Integer.parseInt(data[6]),
-                        data[7],"/v/", new Byte[4], 'S',0.0,0.0,0,0,360, data[8].trim());
+                        data[4], data[5],Integer.parseInt(data[6]),
+                        data[7],"/v/", new Byte[4], 'S',0.0,0.0,74,0,360, data[8].trim());
                 perfect.add(a);
             }
         }

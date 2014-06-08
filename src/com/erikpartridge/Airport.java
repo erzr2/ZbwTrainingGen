@@ -85,6 +85,14 @@ public class Airport {
         return icao;
     }
     
+    public boolean hasParking(){
+        for(ArrayList a : parking.values()){
+            if(a.size() > 0){
+                return true;
+            }
+        }
+        return false;
+    }
     
    
 }
