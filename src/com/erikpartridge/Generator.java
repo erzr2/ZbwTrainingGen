@@ -34,6 +34,7 @@ public class Generator {
                         acf.getHeading() + "\n");
             }
         }
+        out.close();
     }
     
     public String byteToString(Byte[] in){

@@ -47,7 +47,9 @@ public class Aircraft {
         
     }
 
-    public Aircraft(String callsign, String type, String engine, char rules, String dep, String arr, int cruise, String route, String remarks,Byte[] squawk, char sMode, double lat, double lon, int altitude, int speed, int heading, String park) {
+    public Aircraft(String callsign, String type, String engine, char rules, String dep,
+            String arr, int cruise, String route, String remarks,Byte[] squawk, char sMode,
+            double lat, double lon, int altitude, int speed, int heading, String park) {
         this.callsign = callsign;
         this.type = type;
         this.engine = engine;
