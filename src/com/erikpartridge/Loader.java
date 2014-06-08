@@ -33,6 +33,11 @@ public class Loader {
         } catch (URISyntaxException ex) {
             Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            Airport a = new Airport(new File(resources.get("kpwm_parking.txt").toURI()), "kpwm");
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static void configure(){

@@ -30,13 +30,14 @@ public class Airport {
     
     private final Random rand = new Random();
     
-    public Airport(File f){
-        this.icao = "";
+    public Airport(File f, String icao){
+        this.icao = icao;
         try {
             loadParking(f);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Airport.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Airports.list.put(icao, this);
     }
     /* Should be called only in the constructor -- in a method for better error handling
      * Creates the arraylists and puts them with their keys

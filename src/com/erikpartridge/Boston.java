@@ -105,6 +105,7 @@ public class Boston {
             return 'I';
         }
     }
+    
     private static String changeRoute(String init){
         double type = rand.nextDouble();
         if(init.trim().charAt(6) == ' '){
