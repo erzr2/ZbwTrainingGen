@@ -49,44 +49,21 @@ public class Airport {
         parking.put("G", new ArrayList<>());
         parking.put("C", new ArrayList<>());
         String icao = "";
+        int count = 0;
         //Going through parking place file
         while(in.hasNextLine()){
             String line = in.nextLine();
-            int count = 0;
             if(line.substring(0,2).equals("//")){
-                
             }
             else{
                 if(count == 0){
+                    count = 53161;
                     icao = line.trim().toLowerCase();
+                    System.out.println(icao);
                 }else{
                     String[] split = line.split(":");
                     Point2D.Double pt = new Point2D.Double(Double.parseDouble(split[1]), Double.parseDouble(split[2]));
-                    parking.get(split[0]).add(pt);
-                    count++;
-                }
-            }
-        }
-    }
-    private void loadParking(File f) throws FileNotFoundException{
-        parking = new HashMap<>();
-        Scanner in = new Scanner(f);
-        //Initializing parking
-        parking.put("A", new ArrayList<Point2D.Double>());
-        parking.put("G", new ArrayList<Point2D.Double>());
-        parking.put("C", new ArrayList<Point2D.Double>());
-        
-        //Going through parking place file
-        while(in.hasNextLine()){
-            String line = in.nextLine();
-            
-            if(!line.substring(0,2).equals("//")){          
-                String[] split = line.split(":");
-                if(split.length > 2){
-                   Point2D.Double pt = new Point2D.Double(Double.parseDouble(split[1]), Double.parseDouble(split[2]));
-                   if(parking.get(split[0]) != null){
-                        parking.get(split[0]).add(pt);
-                   }
+                    parking.get(split[0].substring(0,1)).add(pt);
                 }
             }
         }

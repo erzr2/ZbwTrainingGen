@@ -19,12 +19,13 @@ public class Boston {
 
     private final static Random rand = new Random();
     
-    private static ArrayList<Aircraft> perfect;
+    private static ArrayList<Aircraft> perfect = null;
     
+    private static boolean loaded = false;
     //Makes an aircraft
     //Difficulty between 0-10, 5 = average 1 error per flight plan, 10 = 2, etc.
     public static Aircraft makePlane(double difficulty, Airport airport){
-        if(perfect == null){
+        if(!loaded){
             loadPerfect(airport);
         }
         Aircraft acf = perfect.get(rand.nextInt(perfect.size()));
@@ -58,17 +59,16 @@ public class Boston {
     }
     // Creates a perfect airplane from a perfect airplane examples file
     private static void loadPerfect(Airport airport){
-        URL url = Loader.resources.get(airport.getIcao());
+        URL url = Loader.resources.get(airport.getIcao().toLowerCase() + "_perfect_flights.txt");
         InputStream ex = null;
-        
         try {
             ex = url.openStream();
         } catch (IOException ex1) {        
         
         Scanner in = null;
-        
+        System.out.println(url.getPath());
         in = new Scanner(ex);
-        
+        perfect = new ArrayList<>();
         while(in.hasNextLine()){
             String line = in.nextLine();
             System.out.println(line);
