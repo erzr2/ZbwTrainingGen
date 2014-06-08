@@ -51,6 +51,8 @@ public class Boston {
         if(parking != null){
             acf.setLat(parking.x);
             acf.setLon(parking.y);
+            int num = rand.nextInt(10000);
+            acf.setCallsign(acf.getCallsign().substring(0,3) + num);
         return acf;
         } else{
             return null;
