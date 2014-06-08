@@ -27,6 +27,7 @@ public class Generator {
         while(a.hasParking() && count < 45){
             Aircraft acf = Boston.makePlane(difficulty, a);
             if(acf != null){
+                System.out.println("here");
                 out.write(acf.getCallsign() + ":" + acf.getType() + ":" + acf.getEngine() + ":" + 
                         acf.getRules() + ":" + acf.getDep() + ":" + acf.getArr() + ":" + acf.getCruise() + ":"
                         + acf.getRoute() + ":" + acf.getRemarks() + ":" + byteToString(acf.getSquawk()) + ":"

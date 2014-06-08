@@ -45,11 +45,12 @@ public class Airport {
      *
     */
     private void loadParking(File f) throws FileNotFoundException{
+        parking = new HashMap<>();
         Scanner in = new Scanner(f);
         //Initializing parking
-        parking.put("A", new ArrayList<>());
-        parking.put("G", new ArrayList<>());
-        parking.put("C", new ArrayList<>());
+        parking.put("A", new ArrayList<Point2D.Double>());
+        parking.put("G", new ArrayList<Point2D.Double>());
+        parking.put("C", new ArrayList<Point2D.Double>());
         
         //Going through parking place file
         while(in.hasNextLine()){
@@ -57,8 +58,12 @@ public class Airport {
             
             if(!line.substring(0,2).equals("//")){          
                 String[] split = line.split(":");
-                Point2D.Double pt = new Point2D.Double(Double.parseDouble(split[1]), Double.parseDouble(split[2]));
-                parking.get(split[0]).add(pt);
+                if(split.length > 2){
+                   Point2D.Double pt = new Point2D.Double(Double.parseDouble(split[1]), Double.parseDouble(split[2]));
+                   if(parking.get(split[0]) != null){
+                        parking.get(split[0]).add(pt);
+                   }
+                }
             }
         }
     }
