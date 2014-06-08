@@ -6,22 +6,13 @@
 package com.erikpartridge;
 
 import java.awt.geom.Point2D;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.io.InputStream;
-=======
->>>>>>> FETCH_HEAD
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.io.FileUtils;
 
 
 public class Boston {
@@ -68,21 +59,11 @@ public class Boston {
     // Creates a perfect airplane from a perfect airplane examples file
     private static void loadPerfect(Airport airport){
         URL url = Loader.resources.get(airport.getIcao());
-<<<<<<< HEAD
         InputStream ex = null;
         
         try {
             ex = url.openStream();
-        } catch (IOException ex1) {
-=======
-        File ex = new File("/Users/Erik/Downloads/perfect.txt");
-        
-        try {
-           FileUtils.copyURLToFile(url, ex);
-        }catch (IOException ex1) {
->>>>>>> FETCH_HEAD
-            Logger.getLogger(Boston.class.getName()).log(Level.SEVERE, null, ex1);
-        }
+        } catch (IOException ex1) {        
         
         Scanner in = null;
         
@@ -103,8 +84,8 @@ public class Boston {
             }
         }
         in.close();
-    }
-    
+        }
+    }  
     //Uses the preferred routes file to generate a perfect aircraft
     //TODO
     private Aircraft makePerfect(){
