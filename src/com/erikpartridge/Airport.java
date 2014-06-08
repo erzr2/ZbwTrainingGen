@@ -41,6 +41,7 @@ public class Airport {
      * iterates through the parking place file and gets the coordinates
      *
     */
+<<<<<<< HEAD
     private void loadParking(InputStream f){
         Scanner in = new Scanner(f);
         //Initializing parking
@@ -64,6 +65,27 @@ public class Airport {
                     Point2D.Double pt = new Point2D.Double(Double.parseDouble(split[1]), Double.parseDouble(split[2]));
                     parking.get(split[0]).add(pt);
                     count++;
+=======
+    private void loadParking(File f) throws FileNotFoundException{
+        parking = new HashMap<>();
+        Scanner in = new Scanner(f);
+        //Initializing parking
+        parking.put("A", new ArrayList<Point2D.Double>());
+        parking.put("G", new ArrayList<Point2D.Double>());
+        parking.put("C", new ArrayList<Point2D.Double>());
+        
+        //Going through parking place file
+        while(in.hasNextLine()){
+            String line = in.nextLine();
+            
+            if(!line.substring(0,2).equals("//")){          
+                String[] split = line.split(":");
+                if(split.length > 2){
+                   Point2D.Double pt = new Point2D.Double(Double.parseDouble(split[1]), Double.parseDouble(split[2]));
+                   if(parking.get(split[0]) != null){
+                        parking.get(split[0]).add(pt);
+                   }
+>>>>>>> FETCH_HEAD
                 }
             }
         }
