@@ -7,6 +7,7 @@ package com.erikpartridge;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -30,13 +31,9 @@ public class Airport {
     
     private final Random rand = new Random();
     
-    public Airport(File f, String icao){
+    public Airport(InputStream f, String icao){
         this.icao = icao;
-        try {
-            loadParking(f);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Airport.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        loadParking(f);
         Airports.list.put(icao, this);
     }
     /* Should be called only in the constructor -- in a method for better error handling
@@ -44,21 +41,30 @@ public class Airport {
      * iterates through the parking place file and gets the coordinates
      *
     */
-    private void loadParking(File f) throws FileNotFoundException{
+    private void loadParking(InputStream f){
         Scanner in = new Scanner(f);
         //Initializing parking
+        parking = new HashMap<>(4);
         parking.put("A", new ArrayList<>());
         parking.put("G", new ArrayList<>());
         parking.put("C", new ArrayList<>());
-        
+        String icao = "";
         //Going through parking place file
         while(in.hasNextLine()){
             String line = in.nextLine();
-            
-            if(!line.substring(0,2).equals("//")){          
-                String[] split = line.split(":");
-                Point2D.Double pt = new Point2D.Double(Double.parseDouble(split[1]), Double.parseDouble(split[2]));
-                parking.get(split[0]).add(pt);
+            int count = 0;
+            if(line.substring(0,2).equals("//")){
+                
+            }
+            else{
+                if(count == 0){
+                    icao = line.trim().toLowerCase();
+                }else{
+                    String[] split = line.split(":");
+                    Point2D.Double pt = new Point2D.Double(Double.parseDouble(split[1]), Double.parseDouble(split[2]));
+                    parking.get(split[0]).add(pt);
+                    count++;
+                }
             }
         }
     }

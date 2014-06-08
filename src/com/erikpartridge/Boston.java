@@ -8,6 +8,8 @@ package com.erikpartridge;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -61,26 +63,24 @@ public class Boston {
     // Creates a perfect airplane from a perfect airplane examples file
     private static void loadPerfect(Airport airport){
         URL url = Loader.resources.get(airport.getIcao());
-        File ex = null;
+        InputStream ex = null;
         
         try {
-            ex = new File(url.toURI());
-        } catch (URISyntaxException ex1) {
+            ex = url.openStream();
+        } catch (IOException ex1) {
             Logger.getLogger(Boston.class.getName()).log(Level.SEVERE, null, ex1);
         }
         
         Scanner in = null;
         
-        try{
-            in = new Scanner(ex);
-        } catch (FileNotFoundException ex1) {
-            Logger.getLogger(Boston.class.getName()).log(Level.SEVERE, null, ex1);
-        }
+        in = new Scanner(ex);
         
         while(in.hasNextLine()){
             String line = in.nextLine();
+            System.out.println(line);
             if(!line.contains("\\")){
                 String[] data = line.split(":");
+                
                 //Make a new plane from each line
                 Aircraft a;
                 a = new Aircraft(data[0],data[1],data[2],data[3].charAt(0),

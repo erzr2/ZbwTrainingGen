@@ -6,6 +6,8 @@ package com.erikpartridge;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -34,8 +36,8 @@ public class Loader {
             Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            Airport a = new Airport(new File(resources.get("kpwm_parking.txt").toURI()), "kpwm");
-        } catch (URISyntaxException ex) {
+            Airport a = new Airport(resources.get("kpwm_parking.txt").openStream(), "kpwm");
+        } catch (IOException ex) {
             Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -66,19 +68,20 @@ public class Loader {
     
     public static void loadAlternatives() throws URISyntaxException{
         URL url = resources.get("kpwm_alternatives.txt");
-        File f = new File(url.toURI());
-        Scanner s = null;
+        InputStream input = null;
         try {
-            s = new Scanner(f);
-        } catch (FileNotFoundException ex) {
+            input = url.openStream();
+        } catch (IOException ex) {
             Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Scanner s = null;
+        s = new Scanner(input);
         
         while(s.hasNextLine()){
             String line = s.nextLine();
             if(!line.substring(0, 2).equals("//")){
                 String[] data = line.split(":");
-                alts.put(data[0], (ArrayList<String>) Arrays.asList(data));
+                alts.put(data[0], new ArrayList<String>(Arrays.asList(data)));
             }
         }
         s.close();
