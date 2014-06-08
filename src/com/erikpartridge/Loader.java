@@ -77,12 +77,12 @@ public class Loader {
         }
         Scanner s = null;
         s = new Scanner(input);
-        
+        int count = 0;
         while(s.hasNextLine()){
             String line = s.nextLine();
-            if(!line.substring(0, 2).equals("//")){
+            if(count > 0){
                 String[] data = line.split(":");
-                alts.put(data[0], new ArrayList<String>(Arrays.asList(data)));
+                alts.put(data[0], new ArrayList<>(Arrays.asList(data)));
             }
         }
         s.close();

@@ -13,21 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Boston {
 
     private final static Random rand = new Random();
     
-    private static ArrayList<Aircraft> perfect = null;
+    private static ArrayList<Aircraft> perfect = new ArrayList<>();
     
-    private static boolean loaded = false;
     //Makes an aircraft
     //Difficulty between 0-10, 5 = average 1 error per flight plan, 10 = 2, etc.
     public static Aircraft makePlane(double difficulty, Airport airport){
-        if(!loaded){
-            loadPerfect(airport);
-        }
+        loadPerfect(airport);
         Aircraft acf = perfect.get(rand.nextInt(perfect.size()));
         double chance = difficulty / 20;
         double score = rand.nextDouble();
@@ -63,18 +62,17 @@ public class Boston {
         InputStream ex = null;
         try {
             ex = url.openStream();
-        } catch (IOException ex1) {        
+        } catch (IOException ex1) {
+            Logger.getLogger(Boston.class.getName()).log(Level.SEVERE, null, ex1);
+        }   
         
         Scanner in = null;
-        System.out.println(url.getPath());
         in = new Scanner(ex);
-        perfect = new ArrayList<>();
         while(in.hasNextLine()){
             String line = in.nextLine();
-            System.out.println(line);
             if(!line.contains("\\")){
                 String[] data = line.split(":");
-                
+                System.out.println(data);
                 //Make a new plane from each line
                 Aircraft a;
                 a = new Aircraft(data[0],data[1],data[2],data[3].charAt(0),
@@ -84,7 +82,7 @@ public class Boston {
             }
         }
         in.close();
-        }
+            Logger.getLogger(Boston.class.getName()).log(Level.SEVERE, null, "");
     }  
     //Uses the preferred routes file to generate a perfect aircraft
     //TODO
